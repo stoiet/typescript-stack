@@ -16,8 +16,9 @@ USER ${USER}
 RUN mkdir ${WORKDIR}
 RUN mkdir ${USER_NPM}
 
+COPY --chown=user ./configs/npm/.npmrc ${HOME}/.npmrc
+
 ARG NPM_VERSION
-RUN npm config set prefix ${USER_NPM}
 RUN npm install -g npm@${NPM_VERSION}
 
 WORKDIR ${WORKDIR}

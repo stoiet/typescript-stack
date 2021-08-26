@@ -4,6 +4,8 @@ DEBIAN_VERSION				:= `cat ./configs/versions/debian-version`
 NODE_VERSION				:= `cat ./configs/versions/node-version`
 NPM_VERSION					:= `cat ./configs/versions/npm-version`
 
+DOCKERFILE					:= ./configs/docker/Dockerfile
+
 IMAGE_NAME 					:= typescript-stack-image
 IMAGE_VERSION				:= $(or ${IMAGE_VERSION}, ${IMAGE_VERSION}, latest)
 CONTAINER_ID				:= $(or ${CONTAINER_ID}, ${CONTAINER_ID}, `date +%s`)
@@ -49,6 +51,7 @@ check-install: ## Check NPM package install
 
 
 define build_arguments
+	--file ${DOCKERFILE} \
 	--build-arg DEBIAN_VERSION=$(DEBIAN_VERSION) \
 	--build-arg NODE_VERSION=$(NODE_VERSION) \
 	--build-arg NPM_VERSION=$(NPM_VERSION) \

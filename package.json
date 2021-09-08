@@ -13,7 +13,7 @@
     "url": "git+https://github.com/stoiet/typescript-stack.git"
   },
   "scripts": {},
-  "dependencies": {
+  "devDependencies": {
     "typescript": "4.4.2"
   }
 }

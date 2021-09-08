@@ -15,14 +15,9 @@ git (2.14.3>=)
 make help
 ```
 
-#### Build image
+#### Set up project
 
 ```
 make build
-```
-
-#### Container shell
-
-```
-make bash
+make install
 ```

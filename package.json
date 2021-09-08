@@ -1,0 +1,18 @@
+{
+  "name": "typescript-stack",
+  "version": "1.0.0",
+  "description": "TypeScript stack",
+  "homepage": "https://github.com/stoiet/typescript-stack#readme",
+  "bugs": {
+    "url": "https://github.com/stoiet/typescript-stack/issues"
+  },
+  "license": "ISC",
+  "author": "Robert Beretka <to.stoiet@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stoiet/typescript-stack.git"
+  },
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}

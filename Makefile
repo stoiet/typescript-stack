@@ -52,6 +52,15 @@ check-install: ## Check NPM package install
 		./node_modules/.bin/ts-node -e 'console.log(\"It works!\")'"
 
 
+## NPM commands
+
+audit: ## Audit dependencies
+	$(call docker_compose_run) npm audit
+
+install: ## Install dependencies
+	$(call docker_compose_run) npm ci --ignore-scripts
+
+
 define check
 	$(shell sh -c "$(call docker_compose_run) $(1) --version | tr -d v")
 endef

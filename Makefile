@@ -24,7 +24,7 @@ destroy: ## Destroy project containers and image
 	$(call docker_compose) down --rmi all --remove-orphans
 
 images: ## List project images
-	$(call docker_compose) images
+	$(call docker_compose) images $(IMAGE_NAME)
 
 containers: ## List project containers
 	$(call docker_compose) ps --all

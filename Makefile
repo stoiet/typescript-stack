@@ -17,22 +17,6 @@ help:
 
 ## Docker commands:
 
-check-node: ## Check NodeJS version
-	$(eval CONTAINER_NODE_VERSION := $(call check,node))
-	$(eval EXPECTED_NODE_VERSION := $(NODE_VERSION))
-	@if [ "$(CONTAINER_NODE_VERSION)" == "$(EXPECTED_NODE_VERSION)" ]; then echo "Ok" && exit 0; else echo "Error" && exit 1; fi
-
-check-npm: ## Check NPM version
-	$(eval CONTAINER_NPM_VERSION := $(call check,npm))
-	$(eval EXPECTED_NPM_VERSION := $(NPM_VERSION))
-	@if [ "$(CONTAINER_NPM_VERSION)" == "$(EXPECTED_NPM_VERSION)" ]; then echo "Ok" && exit 0; else echo "Error" && exit 1; fi
-
-check-install: ## Check NPM package install
-	docker run --user user --rm --name $(IMAGE_NAME)$(CONTAINER_ID) $(IMAGE_NAME):$(IMAGE_TAG) bash -c "\
-		npm init --yes && \
-		npm install typescript@latest ts-node@latest && \
-		./node_modules/.bin/ts-node -e 'console.log(\"It works!\")'"
-
 build: ## Build project image
 	$(call docker_compose) build $(IMAGE_NAME)
 
@@ -49,9 +33,27 @@ bash: ## Run bash shell
 	$(call docker_compose_run) bash
 
 
+## Check commands
+
+check-node: ## Check NodeJS version
+	$(eval CONTAINER_NODE_VERSION := $(call check,node))
+	$(eval EXPECTED_NODE_VERSION := $(NODE_VERSION))
+	@if [ "$(CONTAINER_NODE_VERSION)" == "$(EXPECTED_NODE_VERSION)" ]; then echo "Ok" && exit 0; else echo "Error" && exit 1; fi
+
+check-npm: ## Check NPM version
+	$(eval CONTAINER_NPM_VERSION := $(call check,npm))
+	$(eval EXPECTED_NPM_VERSION := $(NPM_VERSION))
+	@if [ "$(CONTAINER_NPM_VERSION)" == "$(EXPECTED_NPM_VERSION)" ]; then echo "Ok" && exit 0; else echo "Error" && exit 1; fi
+
+check-install: ## Check NPM package install
+	docker run --user user --rm --name $(IMAGE_NAME)$(CONTAINER_ID) $(IMAGE_NAME):$(IMAGE_TAG) bash -c "\
+		npm init --yes && \
+		npm install typescript@latest ts-node@latest && \
+		./node_modules/.bin/ts-node -e 'console.log(\"It works!\")'"
+
 
 define check
-	$(shell sh -c "docker run --user user --rm --name $(IMAGE_NAME)$(CONTAINER_ID) $(IMAGE_NAME):$(IMAGE_TAG) $(1) --version | tr -d v")
+	$(shell sh -c "$(call docker_compose_run) $(1) --version | tr -d v")
 endef
 
 define docker_compose

@@ -1,0 +1,7 @@
+{
+    "check-leaks": true,
+    "ui": "bdd",
+    "color": true,
+    "extension": ["ts"],
+    "require": ["ts-node/register"]
+}

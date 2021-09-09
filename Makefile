@@ -60,6 +60,9 @@ audit: ## Audit dependencies
 install: ## Install dependencies
 	$(call docker_compose_run) npm ci --ignore-scripts
 
+execute: ## Run application
+	$(call docker_compose_run) npm run execute
+
 
 define check
 	$(shell sh -c "$(call docker_compose_run) $(1) --version | tr -d v")

@@ -63,6 +63,9 @@ install: ## Install dependencies
 execute: ## Run application
 	$(call docker_compose_run) npm run execute
 
+test: ## Run application tests
+	$(call docker_compose_run) npm run test
+
 
 define check
 	$(shell sh -c "$(call docker_compose_run) $(1) --version | tr -d v")

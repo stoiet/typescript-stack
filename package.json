@@ -13,7 +13,8 @@
     "url": "git+https://github.com/stoiet/typescript-stack.git"
   },
   "scripts": {
-    "execute": "ts-node --project tsconfig.json src/index.ts"
+    "execute": "ts-node --project tsconfig.json src/index.ts",
+    "test": "mocha --config configs/mocha/config.json 'src/**/*.spec.ts'"
   },
   "devDependencies": {
     "@types/chai": "4.2.21",
